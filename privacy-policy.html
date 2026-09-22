@@ -3,21 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0f1a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+    <meta name="description" content="Privacy policy for CG Tax Calculator, an app by Sangeeta.">
     <title>Privacy Policy - CG Tax Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 2rem; }
-        h1 { color: #2563eb; }
-        h2 { margin-top: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; }
-        a { color: #2563eb; text-decoration: none; }
+        :root {
+            --primary: #2554eb;
+            --background: #f7f8fb;
+            --border: #e2e8f0;
+            --text-main: #10172a;
+            --text-muted: #5b6472;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #7d9bff;
+                --background: #0b0f1a;
+                --border: #232c40;
+                --text-main: #eef1fb;
+                --text-muted: #96a1b8;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.65;
+            color: var(--text-main);
+            background: var(--background);
+            max-width: 68ch;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+        h1 {
+            font-family: "Bricolage Grotesque", sans-serif;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+        h2 {
+            font-family: "Bricolage Grotesque", sans-serif;
+            font-size: 1.15rem;
+            margin-top: 2.25rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+        }
+        p { margin-bottom: 0.9rem; color: var(--text-main); }
+        p.meta { color: var(--text-muted); }
+        a { color: var(--primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        .back-link { margin-bottom: 2rem; display: inline-block; font-weight: bold; }
+        a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+        .back-link {
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
-    
+
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> September 2026</p>
+    <p class="meta"><strong>Last updated:</strong> September 2026</p>
 
     <p>Sangeeta ("I", "me", or "my") operates the CG Tax Calculator mobile application (the "Service"). This page informs you of my policies regarding the collection, use, and disclosure of personal data when you use my Service and the choices you have associated with that data.</p>
 
@@ -26,7 +77,7 @@
 
     <h2>2. Analytics and Crash Reporting</h2>
     <p>To improve the Service, the app uses Google Analytics for Firebase. This third-party service collects anonymous, aggregated usage data (such as app opens, screens viewed, and crash reports) to help me understand how the app is used and to fix bugs.</p>
-    <p>For more information on what data Google collects, please visit the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy & Terms web page</a>.</p>
+    <p>For more information on what data Google collects, please visit the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy &amp; Terms web page</a>.</p>
 
     <h2>3. In-App Purchases</h2>
     <p>The app offers premium features via in-app subscriptions managed by RevenueCat and the Google Play Store. These services may collect basic transaction history to validate your purchase. I do not have access to your credit card information.</p>
@@ -35,7 +86,7 @@
     <p>I may update our Privacy Policy from time to time. I will notify you of any changes by posting the new Privacy Policy on this page.</p>
 
     <h2>5. Contact Me</h2>
-    <p>If you have any questions about this Privacy Policy, please contact me at: <a href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+    <p>If you have any questions about this Privacy Policy, please contact me at: <a href="mailto:feedback@cgtaxcalculator.com">feedback@cgtaxcalculator.com</a>.</p>
 
 </body>
 </html>

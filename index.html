@@ -3,117 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0f1a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+    <meta name="description" content="Sangeeta builds clean, intuitive, and performant mobile apps with Flutter — including CG Tax Calculator, an Indian capital gains tax tool.">
     <title>Sangeeta | Mobile App Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --background: #f8fafc;
+            --primary: #2554eb;
+            --primary-dark: #1b3fb8;
+            --primary-soft: #e8edfc;
+            --on-primary: #ffffff;
+            --background: #f7f8fb;
             --surface: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --surface-alt: #eef1f6;
+            --border: #e2e8f0;
+            --text-main: #10172a;
+            --text-muted: #5b6472;
+            --shadow-color: rgba(15, 23, 42, 0.08);
+            --shadow-color-strong: rgba(15, 23, 42, 0.14);
         }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #7d9bff;
+                --primary-dark: #a3b8ff;
+                --primary-soft: rgba(125, 155, 255, 0.14);
+                --on-primary: #0b0f1a;
+                --background: #0b0f1a;
+                --surface: #131a2b;
+                --surface-alt: #0f1524;
+                --border: #232c40;
+                --text-main: #eef1fb;
+                --text-muted: #96a1b8;
+                --shadow-color: rgba(0, 0, 0, 0.35);
+                --shadow-color-strong: rgba(0, 0, 0, 0.5);
+            }
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--background);
             color: var(--text-main);
             line-height: 1.6;
         }
-        header {
-            background-color: var(--surface);
-            padding: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            text-align: center;
+
+        h1, h2 {
+            font-family: "Bricolage Grotesque", "IBM Plex Sans", -apple-system, sans-serif;
+            letter-spacing: -0.02em;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
-        /* Profile Section */
+
+        /* Header / hero */
+        header {
+            background-color: var(--surface);
+            padding: 3.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
         .profile {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-bottom: 3rem;
+            align-items: stretch;
             text-align: center;
+            gap: 1.25rem;
         }
-        .profile-img {
-            width: 150px;
-            height: 150px;
+        .avatar {
+            width: 128px;
+            height: 128px;
             border-radius: 50%;
-            background-color: #cbd5e1;
-            object-fit: cover;
-            border: 4px solid var(--surface);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 1rem;
-            /* Placeholder styling */
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            font-size: 14px;
+            background: linear-gradient(155deg, var(--primary-soft), var(--surface-alt));
+            box-shadow: 0 6px 20px var(--shadow-color);
         }
-        .profile h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .profile p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; }
-        
-        /* Section styling */
-        h2 { font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
-        .section { background: var(--surface); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        
-        /* App Grid */
-        .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .app-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; transition: transform 0.2s; }
-        .app-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        .app-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
-        
-        /* Footer */
-        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+        .avatar span {
+            font-family: "Bricolage Grotesque", sans-serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .profile h1 { font-size: 2.5rem; font-weight: 700; }
+        .profile .tagline {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            width: min(100%, 46ch);
+            margin: 0 auto;
+        }
+
+        /* Section rhythm */
+        main.container { padding-top: 3rem; padding-bottom: 1rem; }
+        section { margin-bottom: 3.5rem; }
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+        .prose {
+            color: var(--text-main);
+            max-width: 68ch;
+        }
+        .prose + .prose { margin-top: 0.75rem; }
+
+        /* My Apps — the primary showcase, one real elevated card, not nested */
+        .app-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 1px 2px var(--shadow-color);
+            transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+        }
+        .app-card:hover {
+            border-color: transparent;
+            box-shadow: 0 16px 32px -12px var(--shadow-color-strong);
+            transform: translateY(-2px);
+        }
+        .app-card h3 {
+            font-family: "Bricolage Grotesque", sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+        }
+        .app-card p {
+            color: var(--text-muted);
+            max-width: 62ch;
+            margin-bottom: 1.25rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: var(--on-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 150ms ease;
+        }
+        .btn:hover { background: var(--primary-dark); text-decoration: none; }
+
+        /* Legal — a light footnote, not a heavyweight card */
+        .legal {
+            background: var(--surface-alt);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+        }
+        .legal h2 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .legal p { color: var(--text-muted); font-size: 0.95rem; }
+        .legal a { font-weight: 600; }
+
+        footer {
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        footer .links { margin-top: 0.35rem; }
+
         a { color: var(--primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
+        a:focus-visible, .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+        @media (max-width: 480px) {
+            header { padding: 2.5rem 1.25rem; }
+            .container { padding: 0 1.25rem; }
+            .profile h1 { font-size: 2rem; }
+            .app-card { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="container profile">
-            <!-- Replace 'placeholder.jpg' with your actual photo URL -->
-            <img src="https://via.placeholder.com/150?text=Your+Photo" alt="Sangeeta" class="profile-img">
+            <div class="avatar" role="img" aria-label="Sangeeta"><span>S</span></div>
             <h1>Hi, I'm Sangeeta</h1>
-            <p>I build clean, intuitive, and performant mobile applications using Flutter. Passionate about creating tools that solve real-world problems.</p>
+            <p class="tagline">I build clean, intuitive, and performant mobile applications using Flutter. Passionate about creating tools that solve real-world problems.</p>
         </div>
     </header>
 
     <main class="container">
-        <section class="section">
+        <section>
             <h2>About Me</h2>
-            <p>I am an independent mobile app developer specializing in cross-platform development. With a keen eye for UI/UX design and a strong foundation in Dart and Flutter, I love bringing ideas to life. When I'm not coding, I'm usually exploring new tech or optimizing my workflow.</p>
+            <p class="prose">I am an independent mobile app developer specializing in cross-platform development. With a keen eye for UI/UX design and a strong foundation in Dart and Flutter, I love bringing ideas to life. When I'm not coding, I'm usually exploring new tech or optimizing my workflow.</p>
         </section>
 
-        <section class="section">
+        <section>
             <h2>My Apps</h2>
-            <div class="app-grid">
-                <div class="app-card">
-                    <h3>CG Tax Calculator</h3>
-                    <p>A comprehensive and easy-to-use calculator for Indian Capital Gains Tax. Features support for multiple asset classes, precise holding period calculations, and professional PDF report generation.</p>
-                    <br>
-                    <a href="#">Available on Google Play &rarr;</a>
-                </div>
-                <!-- Add more app cards here as you build them! -->
+            <div class="app-card">
+                <h3>CG Tax Calculator</h3>
+                <p>A comprehensive and easy-to-use calculator for Indian Capital Gains Tax. Features support for multiple asset classes, precise holding period calculations, and professional PDF report generation.</p>
+                <a class="btn" href="https://play.google.com/store/apps/details?id=com.cgtax.calculator" target="_blank" rel="noopener noreferrer">Available on Google Play &rarr;</a>
             </div>
         </section>
 
-        <section class="section">
+        <section class="legal">
             <h2>Legal</h2>
-            <p>If you use my applications, please review the privacy policy below to understand how your data is handled.</p>
-            <br>
-            <a href="privacy-policy.html">📄 Read the Privacy Policy</a>
+            <p>If you use my applications, please review the <a href="privacy-policy.html">privacy policy</a> to understand how your data is handled.</p>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2026 Sangeeta. All rights reserved.</p>
-        <p><a href="mailto:your.email@example.com">Contact Me</a> | <a href="https://github.com/yourusername">GitHub</a></p>
+        <p class="links"><a href="https://github.com/sangeeta-studios" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </footer>
 
 </body>
