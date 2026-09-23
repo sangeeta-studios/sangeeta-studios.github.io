@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b0f1a" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0f1a" id="theme-color-dark" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f8fb" id="theme-color-light" media="(prefers-color-scheme: light)">
     <meta name="description" content="Sangeeta builds clean, intuitive, and performant mobile apps with Flutter — including CG Tax Calculator, an Indian capital gains tax tool.">
     <title>Sangeeta | Mobile App Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,8 +26,24 @@
             --shadow-color-strong: rgba(15, 23, 42, 0.14);
         }
 
+        /* Manual dark mode classes */
+        html.dark {
+            --primary: #7d9bff;
+            --primary-dark: #a3b8ff;
+            --primary-soft: rgba(125, 155, 255, 0.14);
+            --on-primary: #0b0f1a;
+            --background: #0b0f1a;
+            --surface: #131a2b;
+            --surface-alt: #0f1524;
+            --border: #232c40;
+            --text-main: #eef1fb;
+            --text-muted: #96a1b8;
+            --shadow-color: rgba(0, 0, 0, 0.35);
+            --shadow-color-strong: rgba(0, 0, 0, 0.5);
+        }
+
         @media (prefers-color-scheme: dark) {
-            :root {
+            html:not(.light) {
                 --primary: #7d9bff;
                 --primary-dark: #a3b8ff;
                 --primary-soft: rgba(125, 155, 255, 0.14);
@@ -50,6 +66,7 @@
             background-color: var(--background);
             color: var(--text-main);
             line-height: 1.6;
+            transition: background-color 200ms ease, color 200ms ease;
         }
 
         h1, h2 {
@@ -63,10 +80,45 @@
             padding: 0 2rem;
         }
 
+        /* Navbar & Theme Toggle */
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem 2rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+        }
+        .theme-toggle {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 150ms ease;
+        }
+        .theme-toggle:hover {
+            background: var(--border);
+        }
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         /* Header / hero */
         header {
             background-color: var(--surface);
-            padding: 3.5rem 2rem;
+            padding: 4.5rem 2rem 3.5rem;
             border-bottom: 1px solid var(--border);
         }
         .profile {
@@ -81,17 +133,10 @@
             height: 128px;
             border-radius: 50%;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
+            object-fit: cover;
             background: linear-gradient(155deg, var(--primary-soft), var(--surface-alt));
             box-shadow: 0 6px 20px var(--shadow-color);
-        }
-        .avatar span {
-            font-family: "Bricolage Grotesque", sans-serif;
-            font-size: 2.75rem;
-            font-weight: 700;
-            color: var(--primary);
         }
         .profile h1 { font-size: 2.5rem; font-weight: 700; }
         .profile .tagline {
@@ -99,6 +144,20 @@
             font-size: 1.15rem;
             width: min(100%, 46ch);
             margin: 0 auto;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .social-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 150ms ease;
+        }
+        .social-links a:hover {
+            color: var(--primary);
         }
 
         /* Section rhythm */
@@ -114,8 +173,35 @@
             max-width: 68ch;
         }
         .prose + .prose { margin-top: 0.75rem; }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            margin-top: 1.25rem;
+        }
+        .btn-outline:hover {
+            background: var(--surface-alt);
+            color: var(--text-main);
+        }
 
-        /* My Apps — the primary showcase, one real elevated card, not nested */
+        /* Skills Grid */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .skill-tag {
+            background: var(--surface-alt);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        /* App Card */
         .app-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -123,24 +209,58 @@
             padding: 1.75rem 2rem;
             box-shadow: 0 1px 2px var(--shadow-color);
             transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
         .app-card:hover {
             border-color: transparent;
             box-shadow: 0 16px 32px -12px var(--shadow-color-strong);
             transform: translateY(-2px);
         }
-        .app-card h3 {
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            background: var(--surface-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .app-title-group h3 {
             font-family: "Bricolage Grotesque", sans-serif;
             font-size: 1.15rem;
             font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.2rem;
+        }
+        .app-stats {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
         .app-card p {
             color: var(--text-muted);
             max-width: 62ch;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.5rem;
         }
+        .app-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -156,7 +276,7 @@
         }
         .btn:hover { background: var(--primary-dark); text-decoration: none; }
 
-        /* Legal — a light footnote, not a heavyweight card */
+        /* Legal */
         .legal {
             background: var(--surface-alt);
             border-radius: 12px;
@@ -181,39 +301,102 @@
 
         a { color: var(--primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
-        a:focus-visible, .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+        a:focus-visible, .btn:focus-visible, .theme-toggle:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
         @media (max-width: 480px) {
-            header { padding: 2.5rem 1.25rem; }
+            header { padding: 3.5rem 1.25rem 2.5rem; }
             .container { padding: 0 1.25rem; }
             .profile h1 { font-size: 2rem; }
             .app-card { padding: 1.5rem; }
+            .app-header { flex-direction: column; align-items: flex-start; }
+            .app-actions { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
+    <nav>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+            <svg viewBox="0 0 24 24" id="theme-icon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </nav>
+
     <header>
         <div class="container profile">
-            <div class="avatar" role="img" aria-label="Sangeeta"><span>S</span></div>
+            <img class="avatar" src="photo.png" alt="Sangeeta">
             <h1>Hi, I'm Sangeeta</h1>
-            <p class="tagline">I build clean, intuitive, and performant mobile applications using Flutter. Passionate about creating tools that solve real-world problems.</p>
+            <p class="tagline">I am a retired Maths teacher and now an independent mobile app developer. I build clean, intuitive, and performant mobile applications using Flutter. Passionate about creating games and tools that teach or solve real-world problems.</p>
+            <!-- <div class="social-links">
+                <a href="#email-placeholder">Email</a>
+                <a href="#linkedin-placeholder">LinkedIn</a>
+                <a href="#twitter-placeholder">Twitter / X</a>
+            </div> -->
         </div>
     </header>
 
     <main class="container">
         <section>
             <h2>About Me</h2>
-            <p class="prose">I am an independent mobile app developer specializing in cross-platform development. With a keen eye for UI/UX design and a strong foundation in Dart and Flutter, I love bringing ideas to life. When I'm not coding, I'm usually exploring new tech or optimizing my workflow.</p>
+            <p class="prose">I am an independent mobile app developer specializing in cross-platform development. With a keen eye for UI/UX design and a strong foundation in Dart and Flutter, I love bringing ideas to life.</p>
+            <p class="prose">Before focusing on independent app development, I worked as a Maths teacher. When I'm not coding, I'm usually exploring new tech, contributing to open source, or optimizing my workflow.</p>
+            <!-- <a class="btn btn-outline" href="#resume-placeholder" target="_blank">Download Resume (PDF)</a> -->
+        </section>
+
+        <section>
+            <h2>Skills & Tools</h2>
+            <div class="skills-grid">
+                <span class="skill-tag">Flutter</span>
+                <span class="skill-tag">Dart</span>
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Postgres</span>
+                <span class="skill-tag">SQLite</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Agentic Development</span>
+                <span class="skill-tag">Gemini Flow</span>
+            </div>
         </section>
 
         <section>
             <h2>My Apps</h2>
             <div class="app-card">
-                <h3>CG Tax Calculator</h3>
+                <div class="app-header">
+                    <div class="app-icon">[App Icon]</div>
+                    <div class="app-title-group">
+                        <h3>CG Tax Calculator</h3>
+                        <div class="app-stats">
+                            <span>⭐️ 4.8</span>
+                            <span>&bull;</span>
+                            <span>Flutter</span>
+                        </div>
+                    </div>
+                </div>
                 <p>A comprehensive and easy-to-use calculator for Indian Capital Gains Tax. Features support for multiple asset classes, precise holding period calculations, and professional PDF report generation.</p>
-                <a class="btn" href="https://play.google.com/store/apps/details?id=com.cgtax.calculator" target="_blank" rel="noopener noreferrer">Available on Google Play &rarr;</a>
+                <div class="app-actions">
+                    <a class="btn" href="https://play.google.com/store/apps/details?id=com.cgtax.calculator" target="_blank" rel="noopener noreferrer">Available on Google Play &rarr;</a>
+                </div>
             </div>
+        </section>
+
+        <!-- <section>
+            <h2>Open Source</h2>
+            <div class="app-card">
+                <div class="app-title-group">
+                    <h3>[Placeholder Library Name]</h3>
+                </div>
+                <p>A Flutter package that [placeholder description of what it does]. Used by over [placeholder number] developers to build better apps.</p>
+                <div class="app-actions">
+                    <a class="btn btn-outline" href="#github-repo-placeholder" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </section> -->
+
+        <section>
+            <h2>Let's Connect</h2>
+            <p class="prose">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
+            <!-- <a class="btn btn-outline" href="mailto:your.email@example.com">Send an Email &rarr;</a> -->
         </section>
 
         <section class="legal">
@@ -227,5 +410,51 @@
         <p class="links"><a href="https://github.com/sangeeta-studios" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </footer>
 
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            html.classList.add(currentTheme);
+            updateIcon(currentTheme);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            let theme = 'light';
+            if (html.classList.contains('light')) {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                theme = 'dark';
+            } else if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                theme = 'light';
+            } else {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    html.classList.add('light');
+                    theme = 'light';
+                } else {
+                    html.classList.add('dark');
+                    theme = 'dark';
+                }
+            }
+            localStorage.setItem('theme', theme);
+            updateIcon(theme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark' || (theme === '' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+            } else {
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            }
+        }
+        
+        if (!currentTheme) {
+            updateIcon('');
+        }
+    </script>
 </body>
 </html>
