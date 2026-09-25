@@ -243,6 +243,12 @@
             color: var(--text-main);
             margin-bottom: 0.2rem;
         }
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            display: block;
+        }
         .app-stats {
             display: flex;
             gap: 0.75rem;
@@ -329,7 +335,6 @@
             <h1>Hi, I'm Sangeeta</h1>
             <p class="tagline">I am a retired School Headmistress and now an independent mobile app developer. I build clean, intuitive, and performant mobile applications using Flutter. Passionate about creating games and tools that teach or solve real-world problems.</p>
             <!-- <div class="social-links">
-                <a href="#email-placeholder">Email</a>
                 <a href="#linkedin-placeholder">LinkedIn</a>
                 <a href="#twitter-placeholder">Twitter / X</a>
             </div> -->
@@ -378,6 +383,23 @@
                     <a class="btn" href="https://play.google.com/store/apps/details?id=com.cgtax.calculator" target="_blank" rel="noopener noreferrer">Available on Google Play &rarr;</a>
                 </div>
             </div>
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-icon"><img src="birthday-age-calculator-icon.png" alt="Birthday and Age Calculator icon" width="64" height="64"></div>
+                    <div class="app-title-group">
+                        <h3>Birthday and Age Calculator</h3>
+                        <div class="app-stats">
+                            <span>9 languages</span>
+                            <span>&bull;</span>
+                            <span>Flutter</span>
+                        </div>
+                    </div>
+                </div>
+                <p>Exact ages, live birthday countdowns and reminders for family and friends. Includes anniversaries, Hindu calendar (tithi) birthdays and greeting cards to share, in English and 8 Indian languages. Everything stays on your phone.</p>
+                <div class="app-actions">
+                    <span class="btn btn-outline" aria-disabled="true">Coming soon to Google Play</span>
+                </div>
+            </div>
         </section>
 
         <!-- <section>
@@ -396,7 +418,6 @@
         <section>
             <h2>Let's Connect</h2>
             <p class="prose">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
-            <!-- <a class="btn btn-outline" href="mailto:your.email@example.com">Send an Email &rarr;</a> -->
         </section>
 
         <section class="legal">
