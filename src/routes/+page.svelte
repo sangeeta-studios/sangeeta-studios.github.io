@@ -1,322 +1,335 @@
 <script>
-	import ThemeToggle from '#lib/ThemeToggle.svelte';
+	import AppCard from '#lib/components/AppCard.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 	import { apps } from '#lib/apps.js';
+	import { profile, site } from '#lib/site.js';
+
+	const person = {
+		'@type': 'Person',
+		'@id': `${site.url}/#person`,
+		name: site.author,
+		url: site.url,
+		image: `${site.url}/photo.jpg`,
+		jobTitle: 'Mobile App Developer',
+		knowsAbout: profile.skills,
+		sameAs: [site.github]
+	};
+
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{ '@type': 'WebSite', '@id': `${site.url}/#website`, name: site.name, url: site.url },
+			person,
+			...apps.map((app) => ({
+				'@type': 'MobileApplication',
+				name: app.name,
+				description: app.description,
+				operatingSystem: 'Android',
+				applicationCategory: app.category,
+				url: app.playStoreUrl ?? `${site.url}/#${app.id}`,
+				...(app.icon && { image: `${site.url}${app.icon}` }),
+				author: { '@id': person['@id'] }
+			}))
+		]
+	};
 </script>
 
-<svelte:head>
-	<title>Sangeeta | Mobile App Developer</title>
-	<meta
-		name="description"
-		content="Sangeeta builds clean, intuitive, and performant mobile apps with Flutter — including CG Tax Calculator and Math Sprouts, a mental maths game for kids."
-	/>
-</svelte:head>
+<Seo {jsonLd} type="profile" />
 
-<nav>
-	<ThemeToggle />
-</nav>
-
-<header>
-	<div class="container profile">
-		<img class="avatar" src="/photo.png" alt="Sangeeta" />
-		<h1>Hi, I'm Sangeeta</h1>
-		<p class="tagline">
-			I am a retired School Headmistress and now an independent mobile app developer. I build clean,
-			intuitive, and performant mobile applications using Flutter. Passionate about creating games and
-			tools that teach or solve real-world problems.
-		</p>
+<section class="hero">
+	<div class="container hero-grid">
+		<div class="hero-copy">
+			<p class="eyebrow">{profile.role}</p>
+			<h1>Hi, I'm <span class="highlight">Sangeeta</span></h1>
+			<p class="lead">{profile.intro}</p>
+			<div class="actions">
+				<a class="btn btn-primary" href="#apps">Explore my apps</a>
+				<a class="btn btn-secondary" href="#about">About me</a>
+			</div>
+		</div>
+		<div class="hero-media">
+			<img
+				class="portrait"
+				src="/photo.jpg"
+				alt="Portrait of Sangeeta"
+				width="512"
+				height="512"
+				fetchpriority="high"
+			/>
+			<p class="badge"><strong>{apps.length} apps</strong> built with Flutter</p>
+		</div>
 	</div>
-</header>
+</section>
 
-<main class="container">
-	<section>
-		<h2>About Me</h2>
-		<p class="prose">
-			I am an independent mobile app developer specializing in cross-platform development. With a keen
-			eye for UI/UX design and a strong foundation in Dart and Flutter, I love bringing ideas to life.
-		</p>
-		<p class="prose">
-			Before focusing on independent app development, I worked as a Maths teacher and a School's
-			Headmistress. When I'm not coding, I'm usually exploring new tech, contributing to open source,
-			or optimizing my workflow.
-		</p>
-	</section>
+<section class="section" id="apps" aria-labelledby="apps-title">
+	<div class="container">
+		<p class="eyebrow">Portfolio</p>
+		<h2 class="section-title" id="apps-title">My apps</h2>
+		<p class="section-lead">Games and tools that teach or solve real-world problems.</p>
 
-	<section>
-		<h2>Skills &amp; Tools</h2>
-		<div class="skills-grid">
-			{#each ['Flutter', 'Dart', 'HTML', 'Python', 'Postgres', 'SQLite', 'Git', 'Agentic Development', 'Gemini Flow'] as skill}
-				<span class="skill-tag">{skill}</span>
+		<div class="app-grid">
+			{#each apps as app (app.id)}
+				<AppCard {app} />
 			{/each}
 		</div>
-	</section>
 
-	<section>
-		<h2>My Apps</h2>
-		{#each apps as app}
-			<div class="app-card">
-				<div class="app-header">
-					<div class="app-icon">
-						{#if app.icon}
-							<img src={app.icon} alt="{app.name} icon" width="64" height="64" />
-						{:else}
-							[App Icon]
-						{/if}
-					</div>
-					<div class="app-title-group">
-						<h3>{app.name}</h3>
-						<div class="app-stats">
-							{#each app.stats as stat, i}
-								{#if i > 0}<span>&bull;</span>{/if}
-								<span>{stat}</span>
-							{/each}
-						</div>
-					</div>
-				</div>
-				<p>{app.description}</p>
-				<div class="app-actions">
-					{#if app.playStoreUrl}
-						<a class="btn" href={app.playStoreUrl} target="_blank" rel="noopener noreferrer">
-							Available on Google Play &rarr;
-						</a>
-					{:else}
-						<span class="btn btn-outline" aria-disabled="true">Coming soon to Google Play</span>
-					{/if}
-				</div>
-			</div>
-		{/each}
-	</section>
-
-	<section>
-		<h2>Let's Connect</h2>
-		<p class="prose">
-			I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
-			vision. Feel free to reach out!
-		</p>
-	</section>
-
-	<section class="legal">
-		<h2>Legal</h2>
-		<p>
+		<p class="legal-note">
 			If you use my applications, please review the <a href="/privacy-policy">privacy policy</a> to
 			understand how your data is handled, and the <a href="/terms">terms of use</a> for purchases and
 			subscriptions.
 		</p>
-	</section>
-</main>
+	</div>
+</section>
 
-<footer>
-	<p>&copy; 2026 Sangeeta. All rights reserved.</p>
-	<p class="links">
-		<a href="https://github.com/sangeeta-studios" target="_blank" rel="noopener noreferrer">GitHub</a>
-	</p>
-</footer>
+<section class="section alt" id="about" aria-labelledby="about-title">
+	<div class="container about-grid">
+		<div>
+			<p class="eyebrow">About</p>
+			<h2 class="section-title" id="about-title">About me</h2>
+			<div class="prose">
+				{#each profile.about as paragraph, i (i)}
+					<p>{paragraph}</p>
+				{/each}
+			</div>
+		</div>
+
+		<div class="side">
+			<div class="panel">
+				<h3>My journey</h3>
+				<ol class="journey">
+					{#each profile.journey as step, i (step)}
+						<li class:current={i === profile.journey.length - 1}>{step}</li>
+					{/each}
+				</ol>
+			</div>
+			<div class="panel">
+				<h3>Skills &amp; tools</h3>
+				<ul class="skills">
+					{#each profile.skills as skill (skill)}
+						<li class="chip">{skill}</li>
+					{/each}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section" id="connect" aria-labelledby="connect-title">
+	<div class="container">
+		<div class="cta">
+			<div>
+				<h2 class="section-title" id="connect-title">Let's connect</h2>
+				<p class="section-lead">{profile.connect}</p>
+			</div>
+			<a class="btn btn-primary" href={site.github} target="_blank" rel="noopener noreferrer">
+				Find me on GitHub <span aria-hidden="true">&rarr;</span>
+			</a>
+		</div>
+	</div>
+</section>
 
 <style>
-	* { margin: 0; padding: 0; }
-
-	h1, h2 {
-		font-family: "Bricolage Grotesque", "IBM Plex Sans", -apple-system, sans-serif;
-		letter-spacing: -0.02em;
-	}
-
-	.container {
-		max-width: 900px;
-		margin: 0 auto;
-		padding: 0 2rem;
-	}
-
-	nav {
-		display: flex;
-		justify-content: flex-end;
-		padding: 1rem 2rem;
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 100%;
-	}
-
-	/* Header / hero */
-	header {
-		background-color: var(--surface);
-		padding: 4.5rem 2rem 3.5rem;
+	/* Hero */
+	.hero {
+		position: relative;
+		overflow: hidden;
+		padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5rem);
 		border-bottom: 1px solid var(--border);
+		background:
+			radial-gradient(40rem 26rem at 85% 10%, var(--primary-soft), transparent 70%),
+			radial-gradient(30rem 20rem at 5% 100%, var(--accent-soft), transparent 70%), var(--surface);
 	}
-	.profile {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		text-align: center;
-		gap: 1.25rem;
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1.25fr 1fr;
+		align-items: center;
+		gap: clamp(2rem, 6vw, 4.5rem);
 	}
-	.avatar {
-		width: 128px;
-		height: 128px;
-		border-radius: 50%;
-		margin: 0 auto;
-		display: block;
-		object-fit: cover;
-		background: linear-gradient(155deg, var(--primary-soft), var(--surface-alt));
-		box-shadow: 0 6px 20px var(--shadow-color);
+	h1 {
+		font-size: clamp(2.4rem, 6vw, 3.75rem);
+		font-weight: 700;
+		margin: 0.9rem 0 1.2rem;
 	}
-	.profile h1 { font-size: 2.5rem; font-weight: 700; }
-	.profile .tagline {
+	.highlight {
+		color: var(--primary);
+	}
+	.lead {
+		font-size: clamp(1.05rem, 1.6vw, 1.2rem);
 		color: var(--text-muted);
-		font-size: 1.15rem;
-		width: min(100%, 46ch);
-		margin: 0 auto;
+		max-width: 52ch;
 	}
-
-	/* Section rhythm */
-	main.container { padding-top: 3rem; padding-bottom: 1rem; }
-	section { margin-bottom: 3.5rem; }
-	section h2 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin-bottom: 1.25rem;
-	}
-	.prose {
-		color: var(--text-main);
-		max-width: 68ch;
-	}
-	.prose + .prose { margin-top: 0.75rem; }
-
-	/* Skills Grid */
-	.skills-grid {
+	.actions {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.75rem;
+		margin-top: 2rem;
 	}
-	.skill-tag {
-		background: var(--surface-alt);
-		color: var(--text-main);
-		padding: 0.4rem 0.8rem;
-		border-radius: 6px;
-		font-size: 0.9rem;
-		font-weight: 500;
-		border: 1px solid var(--border);
+	.hero-media {
+		position: relative;
+		justify-self: center;
+		width: min(100%, 380px);
 	}
-
-	/* App Card */
-	.app-card {
+	.hero-media::before {
+		content: '';
+		position: absolute;
+		inset: -14px 14px 14px -14px;
+		border-radius: 32px;
+		border: 2px dashed var(--border);
+	}
+	.portrait {
+		position: relative;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: 28px;
+		box-shadow: 0 30px 60px -24px var(--shadow-color-strong);
+	}
+	.badge {
+		position: absolute;
+		left: -1.25rem;
+		bottom: 1.5rem;
+		padding: 0.7rem 1rem;
+		border-radius: var(--radius);
 		background: var(--surface);
 		border: 1px solid var(--border);
-		border-radius: 16px;
-		padding: 1.75rem 2rem;
-		box-shadow: 0 1px 2px var(--shadow-color);
-		transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-	.app-card:hover {
-		border-color: transparent;
-		box-shadow: 0 16px 32px -12px var(--shadow-color-strong);
-		transform: translateY(-2px);
-	}
-	.app-header {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-	.app-icon {
-		width: 64px;
-		height: 64px;
-		border-radius: 12px;
-		background: var(--surface-alt);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 0.8rem;
+		box-shadow: 0 14px 30px -12px var(--shadow-color-strong);
+		font-size: 0.9rem;
 		color: var(--text-muted);
-		border: 1px solid var(--border);
-		flex-shrink: 0;
 	}
-	.app-icon img {
-		width: 100%;
-		height: 100%;
-		border-radius: 12px;
+	.badge strong {
 		display: block;
-	}
-	.app-title-group h3 {
-		font-family: "Bricolage Grotesque", sans-serif;
+		font-family: var(--font-display);
 		font-size: 1.15rem;
-		font-weight: 600;
 		color: var(--text-main);
-		margin-bottom: 0.2rem;
-	}
-	.app-stats {
-		display: flex;
-		gap: 0.75rem;
-		font-size: 0.85rem;
-		color: var(--text-muted);
-		font-weight: 500;
-	}
-	.app-card p {
-		color: var(--text-muted);
-		max-width: 62ch;
-		margin-bottom: 0.5rem;
-	}
-	.app-actions {
-		display: flex;
-		gap: 1rem;
-		margin-top: 0.5rem;
 	}
 
-	.btn {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		background: var(--primary);
-		color: var(--on-primary);
-		font-weight: 600;
+	/* Sections */
+	.section {
+		padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+	}
+	.section.alt {
+		background: var(--surface);
+		border-block: 1px solid var(--border);
+	}
+
+	/* Apps */
+	.app-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+		gap: 1.5rem;
+		margin-top: 2.25rem;
+	}
+	.legal-note {
+		margin-top: 2rem;
 		font-size: 0.95rem;
-		padding: 0.65rem 1.25rem;
-		border-radius: 8px;
-		text-decoration: none;
-		transition: background-color 150ms ease;
+		color: var(--text-muted);
 	}
-	.btn:hover { background: var(--primary-dark); text-decoration: none; }
-	.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-	.btn-outline {
-		background: transparent;
-		color: var(--text-main);
-		border: 1px solid var(--border);
-		margin-top: 1.25rem;
-	}
-	.btn-outline:hover {
-		background: var(--surface-alt);
-		color: var(--text-main);
+	.legal-note a {
+		font-weight: 600;
 	}
 
-	/* Legal */
-	.legal {
-		background: var(--surface-alt);
-		border-radius: 12px;
-		padding: 1.5rem 2rem;
+	/* About */
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: clamp(2rem, 6vw, 4rem);
+		align-items: start;
 	}
-	.legal h2 {
+	.prose {
+		display: grid;
+		gap: 1rem;
+		margin-top: 1.25rem;
+		font-size: 1.05rem;
+		max-width: 62ch;
+	}
+	.side {
+		display: grid;
+		gap: 1.25rem;
+	}
+	.panel {
+		padding: 1.5rem;
+		border-radius: var(--radius-lg);
+		background: var(--background);
+		border: 1px solid var(--border);
+	}
+	.panel h3 {
 		font-size: 1.05rem;
 		font-weight: 600;
-		margin-bottom: 0.4rem;
+		margin-bottom: 1rem;
 	}
-	.legal p { color: var(--text-muted); font-size: 0.95rem; }
-	.legal a { font-weight: 600; }
-
-	footer {
-		border-top: 1px solid var(--border);
-		text-align: center;
-		padding: 2rem;
-		color: var(--text-muted);
-		font-size: 0.9rem;
+	.journey {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.9rem;
 	}
-	footer .links { margin-top: 0.35rem; }
+	.journey li {
+		position: relative;
+		padding-left: 1.75rem;
+		font-weight: 500;
+	}
+	.journey li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.4em;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		border: 2px solid var(--primary);
+		background: var(--surface);
+	}
+	.journey li:not(:last-child)::after {
+		content: '';
+		position: absolute;
+		left: 5px;
+		top: calc(0.4em + 14px);
+		height: calc(100% - 0.4em);
+		width: 2px;
+		background: var(--border);
+	}
+	.journey li.current::before {
+		background: var(--primary);
+		box-shadow: 0 0 0 4px var(--primary-soft);
+	}
+	.skills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
 
-	@media (max-width: 480px) {
-		header { padding: 3.5rem 1.25rem 2.5rem; }
-		.container { padding: 0 1.25rem; }
-		.profile h1 { font-size: 2rem; }
-		.app-card { padding: 1.5rem; }
-		.app-header { flex-direction: column; align-items: flex-start; }
-		.app-actions { flex-direction: column; }
+	/* Call to action */
+	.cta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem 2rem;
+		padding: clamp(1.75rem, 5vw, 3rem);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--border);
+		background:
+			radial-gradient(30rem 16rem at 100% 0%, var(--primary-soft), transparent 70%), var(--surface);
+	}
+
+	@media (max-width: 820px) {
+		.hero-grid,
+		.about-grid {
+			grid-template-columns: 1fr;
+		}
+		.hero-media {
+			order: -1;
+			width: min(72%, 300px);
+		}
+		.badge {
+			left: auto;
+			right: -1rem;
+			bottom: 1rem;
+		}
 	}
 </style>

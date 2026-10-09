@@ -26,7 +26,11 @@
 	}
 </script>
 
-<button class="theme-toggle" aria-label="Toggle Dark Mode" onclick={toggle}>
+<button
+	class="theme-toggle"
+	aria-label={showSun ? 'Switch to light mode' : 'Switch to dark mode'}
+	onclick={toggle}
+>
 	<svg viewBox="0 0 24 24">
 		{#if showSun}
 			<circle cx="12" cy="12" r="5"></circle>
@@ -50,7 +54,9 @@
 		border: 1px solid var(--border);
 		color: var(--text-main);
 		cursor: pointer;
-		padding: 0.5rem;
+		width: 38px;
+		height: 38px;
+		padding: 0;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
@@ -60,13 +66,9 @@
 	.theme-toggle:hover {
 		background: var(--border);
 	}
-	.theme-toggle:focus-visible {
-		outline: 2px solid var(--primary);
-		outline-offset: 2px;
-	}
 	svg {
-		width: 20px;
-		height: 20px;
+		width: 18px;
+		height: 18px;
 		fill: none;
 		stroke: currentColor;
 		stroke-width: 2;

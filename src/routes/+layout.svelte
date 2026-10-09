@@ -1,7 +1,20 @@
 <script>
 	import '../app.css';
+	import SiteHeader from '#lib/components/SiteHeader.svelte';
+	import SiteFooter from '#lib/components/SiteFooter.svelte';
 
 	let { children } = $props();
 </script>
 
-{@render children()}
+<a class="skip-link" href="#main">Skip to content</a>
+<SiteHeader />
+<main id="main">
+	{@render children()}
+</main>
+<SiteFooter />
+
+<style>
+	main {
+		flex: 1;
+	}
+</style>
