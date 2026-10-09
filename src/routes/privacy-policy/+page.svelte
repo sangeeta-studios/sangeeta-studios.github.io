@@ -1,0 +1,106 @@
+<script>
+	import LegalPage from '#lib/LegalPage.svelte';
+</script>
+
+<svelte:head>
+	<title>Privacy Policy - Sangeeta Studios Apps</title>
+	<meta name="description" content="Privacy policy for CG Tax Calculator, Birthday and Age Calculator and Math Sprouts, apps by Sangeeta." />
+</svelte:head>
+
+<LegalPage>
+
+	<h1>Privacy Policy</h1>
+	<p class="meta"><strong>Last updated:</strong> September 2026</p>
+
+	<p>Sangeeta ("I", "me", or "my") publishes the mobile apps listed below. This page explains, for each app, what personal data is collected, how it is used and the choices you have.</p>
+	<nav class="apps">
+		<a href="#cg-tax-calculator">CG Tax Calculator</a>
+		<a href="#birthday-age-calculator">Birthday and Age Calculator</a>
+		<a href="#math-sprouts">Math Sprouts</a>
+	</nav>
+
+	<h2 class="app" id="cg-tax-calculator">CG Tax Calculator</h2>
+	<p>Sangeeta operates the CG Tax Calculator mobile application.</p>
+
+	<h3>Information collection and use</h3>
+	<p>The CG Tax Calculator app processes your financial input (such as purchase dates, sale values, and asset types) locally on your device to compute capital gains tax. <strong>I do not collect, store, or transmit your financial data to any external servers.</strong> Your financial inputs remain strictly on your device.</p>
+
+	<h3>Analytics and crash reporting</h3>
+	<p>To improve the Service, the app uses Google Analytics for Firebase. This third-party service collects anonymous, aggregated usage data (such as app opens, screens viewed, and crash reports) to help me understand how the app is used and to fix bugs.</p>
+	<p>For more information on what data Google collects, please visit the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy &amp; Terms web page</a>.</p>
+
+	<h3>In-app purchases</h3>
+	<p>The app offers premium features via in-app subscriptions managed by RevenueCat and the Google Play Store. These services may collect basic transaction history to validate your purchase. I do not have access to your credit card information.</p>
+
+	<h2 class="app" id="birthday-age-calculator">Birthday and Age Calculator</h2>
+	<p class="meta">Android app <code>com.sangeetastudios.agecalculator</code></p>
+	<p>Sangeeta operates the Birthday and Age Calculator mobile application. The app works offline and keeps what you enter on your device.</p>
+
+	<h3>Information you enter</h3>
+	<p>You can enter names, dates of birth (with or without the year), birth times, anniversaries and other occasions, labels, reminder times and, optionally, photos and mobile numbers of the people you add. <strong>This information is stored only in the app's private storage on your device and is never sent to me or to anyone else.</strong></p>
+
+	<h3>Data collection and sharing</h3>
+	<p>The app does not collect, transmit or share the information you enter. It contains no advertising, analytics or crash-reporting services.</p>
+
+	<h3>In-app purchases</h3>
+	<p>Premium features are sold through Google Play Billing and managed by <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">RevenueCat</a>. When you view, buy or restore Premium, the app connects to the internet, and Google Play and RevenueCat process your purchase history and an anonymous, randomly generated app user ID to verify your purchase. No names, dates, photos, contacts or other content from the app are sent. I do not have access to your payment information.</p>
+
+	<h3>Device features the app uses</h3>
+	<ul>
+		<li><strong>Contacts:</strong> only when you tap "Pick from contacts", through Android's contact picker. The app receives just the one contact you choose and saves its name and number. It does not request the Contacts permission and cannot read your contact list.</li>
+		<li><strong>Photos:</strong> chosen with Android's photo picker or taken with the camera app, then kept in the app's private storage. No storage or camera permission is requested.</li>
+		<li><strong>Notifications:</strong> used only to remind you of birthdays and other occasions you choose.</li>
+		<li><strong>App lock:</strong> uses Android's fingerprint/face and screen-lock prompt. Biometric data is handled by Android and never reaches the app.</li>
+		<li><strong>Calls and messages:</strong> the Call, Message and WhatsApp buttons open your dialer, SMS app or WhatsApp with the number filled in. Nothing is sent until you send it yourself.</li>
+	</ul>
+
+	<h3>Sharing wishes</h3>
+	<p>Greeting cards and wishes are shared only when you tap Share or WhatsApp. Shared wishes include a link to the app on Google Play.</p>
+
+	<h3>Backups</h3>
+	<p>Export, import and automatic backups use Android's file and folder pickers. Backup files are written only to the locations you choose and read only from files you select.</p>
+
+	<h3>Data retention and deletion</h3>
+	<p>You can delete any person, occasion or label in the app at any time. Uninstalling the app or clearing its storage permanently removes all of its data from your device. Purchase records are kept by Google Play and RevenueCat as needed for billing.</p>
+
+	<h3>Children</h3>
+	<p>The app is not directed at children and does not knowingly collect data from anyone.</p>
+
+	<h2 class="app" id="math-sprouts">Math Sprouts</h2>
+	<p class="meta">Android app <code>com.sangeetastudios.mathsprouts</code> &middot; Last updated: September 2026</p>
+	<p>Math Sprouts is a mental maths practice game for children aged about 4 to 10. It is designed for children and their parents, and it is built so that <strong>children's information never leaves the device</strong>.</p>
+
+	<h3>Information stored in the app</h3>
+	<p>A parent or child can create player profiles with a first name or nickname, an age (used only to choose a starting difficulty) and an animal avatar. While playing, the app records each question, the answer typed, whether it was right and how long it took, so it can adapt the difficulty and show progress reports to parents. <strong>All of this is stored only in the app's private storage on the device. It is never uploaded, shared or sent to me or to anyone else.</strong></p>
+
+	<h3>What the app does not do</h3>
+	<ul>
+		<li>No accounts, sign-in, email addresses or phone numbers.</li>
+		<li>No advertising, and no advertising ID. The app does not access device identifiers, location, contacts, camera, microphone or photos.</li>
+		<li>No analytics, tracking or crash-reporting services.</li>
+		<li>No chat, social features or user-generated content visible to others.</li>
+	</ul>
+
+	<h3>In-app purchases</h3>
+	<p>Math Sprouts Premium is sold through Google Play Billing and managed by <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">RevenueCat</a>. Purchases can only be started by an adult, from a screen protected by a parental gate. When Premium is viewed, bought or restored, Google Play and RevenueCat process the purchase history together with an anonymous, randomly generated app user ID to confirm whether Premium is active. No names, ages, answers or other information about children is sent. I never see payment details.</p>
+
+	<h3>Reports and exports</h3>
+	<p>Parents can create a PDF report or a CSV file of a child's practice from the parent area. These files are created on the device and are shared only if the parent chooses to send them, using Android's share sheet.</p>
+
+	<h3>Parental controls</h3>
+	<p>The parent area, purchases, settings and all links that leave the app are behind a parental gate. Parents can view, edit or delete any profile and its practice history at any time from the parent area.</p>
+
+	<h3>Data retention and deletion</h3>
+	<p>Deleting a profile removes it and its history from the device immediately. Uninstalling the app, or clearing its storage, permanently removes all of its data. Purchase records are kept by Google Play and RevenueCat as needed for billing and legal requirements.</p>
+
+	<h3>Children's privacy</h3>
+	<p>Math Sprouts is directed at children and follows Google Play's Families policy. Because no personal information about children is collected by me or transmitted from the device, there is nothing for me to access, share or sell. If you believe information about a child has been collected in error, please contact me at the address below and I will help.</p>
+
+	<h2>Changes to This Privacy Policy</h2>
+	<p>I may update this Privacy Policy from time to time. I will notify you of any changes by posting the new Privacy Policy on this page.</p>
+
+	<h2>Contact Me</h2>
+	<p>If you have any questions about this Privacy Policy, please email <a href="mailto:sitasingla123@gmail.com">sitasingla123@gmail.com</a> or use the developer contact details on the app's Google Play listing.</p>
+	<p>See also the <a href="/terms">Terms of Use</a>.</p>
+
+</LegalPage>
